@@ -11,6 +11,7 @@ FPS = 60
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
+
 # Function to rotate a 3D point around the origin
 def rotate_point(point, angle_x, angle_y, angle_z):
     x, y, z = point
@@ -32,6 +33,7 @@ def rotate_point(point, angle_x, angle_y, angle_z):
 
     return x, y, z
 
+
 # Function to draw a rotating 3D cube with perspective
 def draw_cube(screen, angle_x, angle_y, angle_z):
     cube_size = 100
@@ -46,21 +48,39 @@ def draw_cube(screen, angle_x, angle_y, angle_z):
         (cube_size, cube_size, cube_size),
     ]
 
-    rotated_points = [rotate_point(point, angle_x, angle_y, angle_z) for point in cube_points]
+    rotated_points = [
+        rotate_point(point, angle_x, angle_y, angle_z) for point in cube_points
+    ]
 
     # Connect the points to draw the cube edges
     for i in range(4):
         point1 = rotated_points[i]
         point2 = rotated_points[i + 4]
-        pygame.draw.line(screen, WHITE, perspective_projection(point1), perspective_projection(point2))
+        pygame.draw.line(
+            screen,
+            WHITE,
+            perspective_projection(point1),
+            perspective_projection(point2),
+        )
 
         point1 = rotated_points[i]
         point2 = rotated_points[(i + 1) % 4]
-        pygame.draw.line(screen, WHITE, perspective_projection(point1), perspective_projection(point2))
+        pygame.draw.line(
+            screen,
+            WHITE,
+            perspective_projection(point1),
+            perspective_projection(point2),
+        )
 
         point1 = rotated_points[i + 4]
         point2 = rotated_points[((i + 1) % 4) + 4]
-        pygame.draw.line(screen, WHITE, perspective_projection(point1), perspective_projection(point2))
+        pygame.draw.line(
+            screen,
+            WHITE,
+            perspective_projection(point1),
+            perspective_projection(point2),
+        )
+
 
 # Function for perspective projection
 def perspective_projection(point):
@@ -73,6 +93,7 @@ def perspective_projection(point):
     screen_y = y * scale + SCREEN_HEIGHT // 2
 
     return screen_x, screen_y
+
 
 # Main function
 def main():
@@ -98,6 +119,7 @@ def main():
         clock.tick(FPS)
 
     pygame.quit()
+
 
 if __name__ == "__main__":
     main()
